@@ -1,0 +1,381 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+header h1 {
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.score-board > div {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.game-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-area {
+    flex: 1;
+    position: relative;
+    height: 500px;
+    max-height: 70vh;
+}
+
+.pinball-section, .puzzle-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    overflow: hidden;
+}
+
+.pinball-section.hidden, .puzzle-section.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.pinball-container {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(180deg, #2d3748 0%, #4a5568 100%);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #e2e8f0;
+}
+
+.ball {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #ff6b6b, #ee5a52);
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
+    transition: all 0.1s ease;
+    z-index: 10;
+}
+
+.paddle {
+    width: 100px;
+    height: 15px;
+    background: linear-gradient(45deg, #48bb78, #38a169);
+    border-radius: 8px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.1s ease;
+}
+
+.paddle:hover {
+    transform: translateX(-50%) scale(1.05);
+}
+
+.pinball-lane {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.pinball-path {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(72, 187, 120, 0.3), rgba(56, 161, 105, 0.3));
+    border-left: 2px solid rgba(72, 187, 120, 0.8);
+    border-right: 2px solid rgba(72, 187, 120, 0.8);
+    transition: all 0.3s ease;
+}
+
+.pinball-path.active {
+    background: linear-gradient(90deg, rgba(72, 187, 120, 0.6), rgba(56, 161, 105, 0.6));
+    box-shadow: 0 0 15px rgba(72, 187, 120, 0.5);
+}
+
+.puzzle-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 460px;
+}
+
+.puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+.puzzle-header h3 {
+    color: #4a5568;
+    font-size: 1.3rem;
+}
+
+.puzzle-timer {
+    background: linear-gradient(45deg, #f56565, #e53e3e);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 15px;
+    flex: 1;
+    max-height: 300px;
+    width: 100%;
+    height: auto;
+}
+
+.puzzle-tile {
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.puzzle-tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.puzzle-tile.selected {
+    background: linear-gradient(45deg, #48bb78, #38a169);
+    transform: scale(1.1);
+}
+
+.puzzle-tile.correct {
+    background: linear-gradient(45deg, #48bb78, #38a169);
+    animation: correctPulse 0.5s ease;
+}
+
+.puzzle-tile.wrong {
+    background: linear-gradient(45deg, #f56565, #e53e3e);
+    animation: wrongShake 0.5s ease;
+}
+
+.puzzle-controls {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.puzzle-controls button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#new-puzzle-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+}
+
+#hint-btn {
+    background: linear-gradient(45deg, #ed8936, #dd6b20);
+    color: white;
+}
+
+.puzzle-controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.overlay-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+}
+
+.overlay-content h2 {
+    color: #4a5568;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.overlay-content p {
+    color: #718096;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+#restart-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+@keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .score-board {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .puzzle-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .puzzle-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .game-area {
+        height: 400px;
+        max-height: 60vh;
+    }
+    
+    .puzzle-container {
+        max-height: 360px;
+    }
+    
+    .puzzle-grid {
+        max-height: 200px;
+    }
+} 

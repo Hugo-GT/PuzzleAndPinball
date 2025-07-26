@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle & Pinball</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Puzzle & Pinball</h1>
+            <div class="score-board">
+                <div class="score">Score: <span id="score">0</span></div>
+                <div class="lives">Lives: <span id="lives">3</span></div>
+                <div class="level">Level: <span id="level">1</span></div>
+            </div>
+        </header>
+        
+        <div class="game-toggle">
+            <button id="toggle-btn" class="toggle-button">Switch to Pinball</button>
+        </div>
+        
+        <div class="game-area">
+            <!-- Pinball Section -->
+            <div class="pinball-section" id="pinball-section">
+                <div class="pinball-container">
+                    <div id="ball" class="ball"></div>
+                    <div id="paddle" class="paddle"></div>
+                    <!-- 8 lanes with 4 paths each -->
+                    <div class="pinball-lane" style="top: 20px;">
+                        <div class="pinball-path" data-lane="0" data-path="0" style="left: 0%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="0" data-path="1" style="left: 25%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="0" data-path="2" style="left: 50%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="0" data-path="3" style="left: 75%; width: 25%;"></div>
+                    </div>
+                    <div class="pinball-lane" style="top: 70px;">
+                        <div class="pinball-path" data-lane="1" data-path="0" style="left: 0%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="1" data-path="1" style="left: 25%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="1" data-path="2" style="left: 50%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="1" data-path="3" style="left: 75%; width: 25%;"></div>
+                    </div>
+                    <div class="pinball-lane" style="top: 120px;">
+                        <div class="pinball-path" data-lane="2" data-path="0" style="left: 0%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="2" data-path="1" style="left: 25%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="2" data-path="2" style="left: 50%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="2" data-path="3" style="left: 75%; width: 25%;"></div>
+                    </div>
+                    <div class="pinball-lane" style="top: 170px;">
+                        <div class="pinball-path" data-lane="3" data-path="0" style="left: 0%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="3" data-path="1" style="left: 25%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="3" data-path="2" style="left: 50%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="3" data-path="3" style="left: 75%; width: 25%;"></div>
+                    </div>
+                    <div class="pinball-lane" style="top: 220px;">
+                        <div class="pinball-path" data-lane="4" data-path="0" style="left: 0%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="4" data-path="1" style="left: 25%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="4" data-path="2" style="left: 50%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="4" data-path="3" style="left: 75%; width: 25%;"></div>
+                    </div>
+                    <div class="pinball-lane" style="top: 270px;">
+                        <div class="pinball-path" data-lane="5" data-path="0" style="left: 0%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="5" data-path="1" style="left: 25%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="5" data-path="2" style="left: 50%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="5" data-path="3" style="left: 75%; width: 25%;"></div>
+                    </div>
+                    <div class="pinball-lane" style="top: 320px;">
+                        <div class="pinball-path" data-lane="6" data-path="0" style="left: 0%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="6" data-path="1" style="left: 25%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="6" data-path="2" style="left: 50%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="6" data-path="3" style="left: 75%; width: 25%;"></div>
+                    </div>
+                    <div class="pinball-lane" style="top: 370px;">
+                        <div class="pinball-path" data-lane="7" data-path="0" style="left: 0%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="7" data-path="1" style="left: 25%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="7" data-path="2" style="left: 50%; width: 25%;"></div>
+                        <div class="pinball-path" data-lane="7" data-path="3" style="left: 75%; width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Puzzle Section -->
+            <div class="puzzle-section" id="puzzle-section">
+                <div class="puzzle-container">
+                    <div class="puzzle-header">
+                        <h3>Solve the Puzzle!</h3>
+                        <div class="puzzle-timer">Time: <span id="puzzle-timer">30</span>s</div>
+                    </div>
+                    <div class="puzzle-grid" id="puzzle-grid">
+                        <!-- Puzzle tiles will be generated by JavaScript -->
+                    </div>
+                    <div class="puzzle-controls">
+                        <button id="new-puzzle-btn">New Puzzle</button>
+                        <button id="hint-btn">Hint</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-overlay" id="game-overlay">
+            <div class="overlay-content">
+                <h2 id="overlay-title">Game Over</h2>
+                <p id="overlay-message">You ran out of lives!</p>
+                <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
